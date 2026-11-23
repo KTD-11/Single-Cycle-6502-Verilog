@@ -1,0 +1,25 @@
+vsim -voptargs="+acc" work.p6502_tb
+
+add wave -color "white" -radix decimal "sim:/p6502_tb/p6502_DUT/REG_FILE_INSTANCE/a_out"
+
+add wave -color "red" -radix decimal "sim:/p6502_tb/p6502_DUT/REG_FILE_INSTANCE/x_out"
+
+add wave -color "blue" -radix hexadecimal "sim:/p6502_tb/p6502_DUT/REG_FILE_INSTANCE/y_out"
+
+add wave -color "green" -radix decimal "sim:/p6502_tb/clk"
+
+add wave -color "yellow" -radix decimal "sim:/p6502_tb/rst"
+
+add wave -color "violet" -radix decimal "sim:/p6502_tb/p6502_DUT/ALU_INSTANCE/ALU_Output"
+
+add wave -color "violet" -radix decimal "sim:/p6502_tb/p6502_DUT/ALU_INSTANCE/A"
+
+add wave -color "violet" -radix decimal "sim:/p6502_tb/p6502_DUT/EA_INSTANCE/effective_address"
+
+add wave -color "violet" -radix decimal "sim:/p6502_tb/p6502_DUT/MEMORY_INSTANCE/rEn_B"
+
+add wave -color "violet" -radix decimal "sim:/p6502_tb/p6502_DUT/ALU_INSTANCE/ALU_Controls"
+
+
+run -all
+
