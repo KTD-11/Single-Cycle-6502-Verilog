@@ -1,29 +1,37 @@
-module memory (
-    input  wire        clk,
-    input  wire        wEn_B,
-    input  wire        rEn_B,
-    input  wire [7:0]  dIn_B,
-    input  wire [15:0] addr_B,
-    input  wire [15:0] addr_A,
-    output wire [23:0] out_A,
-    output wire [7:0]  out_B,
-    output wire [15:0] out_C
-);
+module p6502_tb;
 
-  reg [7:0] mem [0:65535];
+reg clk;
+reg rst;
 
-  // Port A: 3-byte combinational instruction fetch {opcode, byte1, byte2}
-  assign out_A = {mem[addr_A], mem[addr_A + 16'd1], mem[addr_A + 16'd2]};
+p6502 p6502_DUT(.clk(clk), .rst(rst));
 
-  // Port B: Combinational read, synchronous write
-  assign out_B = rEn_B ? mem[addr_B] : 8'h00;
+always #5 clk = ~clk;
 
-  always @(posedge clk) begin
-    if (wEn_B)
-      mem[addr_B] <= dIn_B;
-  end
+initial begin
 
-  // Port C: 16-bit little-endian reset vector ($FFFC-$FFFD)
-  assign out_C = {mem[16'hFFFD], mem[16'hFFFC]};
+	$readmemh("program.txt", p6502_DUT.MEMORY_INSTANCE.mem);
+	
+	clk = 0;
+	rst = 1;
+
+	#12
+
+	rst = 0;
+	
+  $display("SORTED ARRAY ($0200-$0207): %h %h %h %h %h %h %h %h",
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0200],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0201],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0202],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0203],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0204],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0205],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0206],
+    p6502_DUT.MEMORY_INSTANCE.mem[16'h0207]
+  );
+
+	#1000;
+
+  $stop;
+end
 
 endmodule

@@ -14,7 +14,7 @@
 # //
 # do run
 # vsim -voptargs=""+acc"" work.p6502_tb 
-# Start time: 04:53:20 on Nov 23,2026
+# Start time: 16:21:59 on Nov 26,2026
 # ** Note: (vsim-8009) Loading existing optimized design _opt5
 # Loading work.p6502_tb(fast)
 # Loading work.p6502(fast)
@@ -32,8 +32,10 @@
 # Loading work.effectiveAddress(fast)
 # Loading work.MUX2X1(fast)
 # Loading work.ALU(fast)
-# ** Note: $stop    : /home/ktd-usr/Projects/6502/p6502_tb.v(33)
+# SORTED ARRAY ($0200-$0207): 00 00 00 00 00 00 00 00
+# ** Note: $stop    : p6502_tb.v(34)
 #    Time: 1012 ns  Iteration: 0  Instance: /p6502_tb
-# Break in Module p6502_tb at /home/ktd-usr/Projects/6502/p6502_tb.v line 33
-# End time: 04:53:35 on Nov 23,2026, Elapsed time: 0:00:15
+# Break in Module p6502_tb at p6502_tb.v line 34
+# Break key hit
+# End time: 16:22:25 on Nov 26,2026, Elapsed time: 0:00:26
 # Errors: 0, Warnings: 0
